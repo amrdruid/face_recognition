@@ -77,7 +77,7 @@ def photo(request):
         data = json.loads(request.body)
         return HttpResponse(data["photo"])
     if request.method == 'GET':
-        data = request.readline()
+        data = json.loads(request.body)
         return HttpResponse(data)
 
     return HttpResponse("No request")
