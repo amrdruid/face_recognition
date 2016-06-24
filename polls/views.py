@@ -1,6 +1,10 @@
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import csrf_exempt
 import cv2, os
 import numpy as np
+import json
 from PIL import Image
 cascadePath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath)
@@ -67,11 +71,13 @@ def get_images_and_labels(path):
     # return the images list and labels list
     return images, labels
 
-def photo(APIView):
-    # if request.method == 'POST':
-    #     # photo = request.data
-    #     return HttpResponse("Post request")
-    # if request.method == 'GET':
-    #     return HttpResponse("Get request")
+@csrf_exempt
+def photo(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        return HttpResponse(data["photo"])
+    if request.method == 'GET':
+        data = request.readline()
+        return HttpResponse(data)
 
     return HttpResponse("No request")
