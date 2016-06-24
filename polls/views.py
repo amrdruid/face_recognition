@@ -66,3 +66,12 @@ def get_images_and_labels(path):
             cv2.waitKey(50)
     # return the images list and labels list
     return images, labels
+
+def photo(APIView):
+    # if request.method == 'POST':
+    #     # photo = request.data
+    #     return HttpResponse("Post request")
+    # if request.method == 'GET':
+    #     return HttpResponse("Get request")
+
+    return HttpResponse("No request")
